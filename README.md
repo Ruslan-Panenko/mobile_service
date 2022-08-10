@@ -1,10 +1,16 @@
 clone repo "git clone https://github.com/Ruslan-Panenko/mobile_service.git"
+
 run docker-compose "docker-compose up"
+
 run migrations:
     enter in django container "docker exec -ti <container_id> bash"
     run command "python manage.py makemigrations"
     and "python manage.py migrate"
+    
 open '0.0.0.0:8000'
+
+
+
 
 TimeSheet
 

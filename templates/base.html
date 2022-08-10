@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<header style="text-align: right">
+    <a href="{% url 'registration' %}" style="padding-right: 50px; font-size: 30px">Registration</a>
+    <a href="{% url 'login' %}" style="padding-right: 50px; font-size: 30px">login</a>
+    <a href="{% url 'logout' %}" style="padding-right: 50px; font-size: 30px">logout</a>
+</header>
+
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

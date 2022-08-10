@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>TASK</h1>
+    <p>Task ID: {{ task.id }}</p>
+    <form method="POST">
+    {% csrf_token %}
+        <p>Task Brand: <input type="text" name="brand" value="{{ task.brand }}"></p>
+        <p>Phone problem: <input type="text" name="problem" value="{{ task.problem }}"></p>
+        {% if user.is_master %}
+        <p>Task status:
+            <select name="status" default="{{ task.status }}">
+                {% for _, status in status_choices %}
+                    <option value="{{ status }}">{{ status }}</option>
+                    
+                {% endfor %}
+
+            </select>
+        </p>
+
+        {% else %}
+<p>Task Status: {{ task.status }}</p>
+    {% endif %}
+        <button type="submit">Update</button>
+    {% if task.status != 'in progress' or task.status != 'done' and user.is_master %}
+        <a href="/delete/{{ task.id }}"><button>Delete</button></a>
+    {% endif %}
+
+    </form>
+
+
+    <h2>Invoices</h2>
+        {% if user.is_master %}
+        <a href="/create_invoice/{{ task.id }}">
+            Create Invoice
+        </a>
+    {% endif %}
+
+
+    {% for invoice in invoices %}
+        <div style="border: solid 1px black; padding: 5px; margin: 5px">
+        <p>Invoice Description: {{ invoice.description }}</p>
+        <p>Invoice Price: {{ invoice.price }}</p>
+</div>
+
+    {% endfor %}
+{% endblock %}
